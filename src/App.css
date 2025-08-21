@@ -1,38 +1,319 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
 .App {
-  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+h1, h2, h3 {
+  color: #4f46e5;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+form input, form select, form textarea {
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 100%;
+  font-size: 1rem;
+  box-sizing: border-box;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+button {
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+}
+
+button:hover {
+  background-color: #4338ca;
+}
+
+button:disabled {
+  background-color: #a5b4fc;
+  cursor: not-allowed;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+th, td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background-color: #eef2ff;
+}
+
+.actions button {
+  margin-right: 0.5rem;
+  background-color: #6b7280;
+}
+
+.actions button:hover {
+  background-color: #4b5563;
+}
+
+.header {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  background-color: white;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+}
+
+.header h1 {
+  margin: 0;
+}
+
+.logout-button {
+  background-color: #dc2626;
+}
+
+.logout-button:hover {
+  background-color: #b91c1c;
+}
+.nav-link {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--border-radius);
+  transition: background-color 0.2s ease;
+}
+
+.nav-link:hover {
+  background-color: var(--color-primary-light);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.active-link {
+  background-color: var(--color-primary);
+  color: white;
+}
+:root {
+  --color-primary: #6b46c1;
+  --color-primary-light: #8f5cf7;
+  --color-accent: #319795;
+  --color-bg: #f7fafc;
+  --color-bg-dark: #18181b;
+  --color-surface: #ffffff;
+  --color-surface-dark: #27272a;
+  --color-border: #e4e4e7;
+  --color-text: #18181b;
+  --color-text-dark: #f4f4fd;
+  --border-radius: 16px;
+  --card-shadow: 0 4px 14px rgba(81, 81, 91, 0.08);
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@keyframes App-logo-spin {
+/* Dark mode styles */
+[data-theme='dark'] {
+  --color-bg: var(--color-bg-dark);
+  --color-surface: var(--color-surface-dark);
+  --color-text: var(--color-text-dark);
+  --color-border: #393948;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background-color var(--transition), color var(--transition);
+}
+
+/* Stats Card */
+.stats-card {
+  background-color: var(--color-surface);
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow);
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: background-color var(--transition), box-shadow var(--transition);
+}
+
+.stats-card:hover {
+  box-shadow: 0 6px 20px rgba(101, 101, 125, 0.15);
+}
+
+.stats-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  color: white;
+  font-size: 1.5rem;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+}
+
+.stats-title {
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin-bottom: 0.3rem;
+}
+
+.stats-value {
+  font-size: 1.5rem;
+}
+
+/* Button Styles */
+button {
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color var(--transition), box-shadow var(--transition);
+}
+
+button:focus,
+button:hover {
+  box-shadow: 0 0 8px rgba(107, 70, 193, 0.6);
+  outline: none;
+}
+
+button.primary {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+button.primary:hover {
+  background-color: var(--color-primary-light);
+}
+
+/* Layout */
+.header {
+  background-color: var(--color-surface);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.grid-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  padding: 1.5rem;
+  background-color: var(--color-bg);
+  border-radius: var(--border-radius);
+}
+:root {
+  --color-primary: #6b46c1;
+  --color-primary-light: #8f5cf7;
+  --color-accent: #319795;
+  --color-bg: #f7fafc;
+  --color-bg-dark: #18181b;
+  --color-surface: #ffffff;
+  --color-surface-dark: #27272a;
+  --color-border: #e4e4e7;
+  --color-text: #18181b;
+  --color-text-dark: #f4f4fd;
+  --border-radius: 16px;
+  --card-shadow: 0 4px 14px rgba(81, 81, 91, 0.08);
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark mode styles */
+[data-theme='dark'] {
+  --color-bg: var(--color-bg-dark);
+  --color-surface: var(--color-surface-dark);
+  --color-text: var(--color-text-dark);
+  --color-border: #393948;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background-color var(--transition), color var(--transition);
+}
+
+/* Animation */
+@keyframes fadeIn {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
+    transform: translateY(20px);
   }
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translateY(0);
   }
 }
+
+.fadeIn {
+  animation: fadeIn 1s ease forwards;
+}
+
+/* Button Styles */
+.btn-primary {
+  text-decoration: none;
+  padding: 1.2rem 2.5rem;
+  background-color: white;
+  color: var(--color-primary);
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 1.25rem;
+  margin-right: 1.5rem;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #f0e7ff;
+}
+
+.btn-outline {
+  text-decoration: none;
+  padding: 1.2rem 2.5rem;
+  border: 2px solid white;
+  color: white;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 1.25rem;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+  display: inline-block;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-outline:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: var(--color-primary);
+}
+
+/* Landing page background (optional image) */
+.landing-background {
+  /* Uncomment and set your background image if you want */
+  /* background-image: url('../assets/background.jpeg'); */
+  /* background-size: cover; */
+  /* background-position: center; */
+  /* background-repeat: no-repeat; */
+}
+
