@@ -1,38 +1,38 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://127.0.0.1:5000/api/v1';
+// Replace this with your backend base URL, e.g. Render deployment URL or localhost during dev
+const BASE_URL = 'https://finewise1-backend.onrender.com/api/v1';
+
 
 const api = axios.create({
-  baseURL: API_BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
+  baseURL: BASE_URL,
+});
+
+// Interceptor to add JWT token from localStorage to Authorization header
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
   },
-});
+  (error) => Promise.reject(error)
+);
 
-api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token');
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-});
-
+// Example export for auth-related API calls
 export const authAPI = {
-  register: (userData) => api.post('/auth/register', userData),
   login: (credentials) => api.post('/auth/login', credentials),
+  register: (userData) => api.post('/auth/register', userData),
   getProfile: () => api.get('/auth/profile'),
 };
 
+// Example export for expenses-related API calls
 export const expensesAPI = {
-  getExpenses: (params) => api.get('/expenses', { params }),
-  createExpense: (expenseData) => api.post('/expenses', expenseData),
-  updateExpense: (id, expenseData) => api.put(`/expenses/${id}`, expenseData),
+  getExpenses: () => api.get('/expenses'),
+  createExpense: (expense) => api.post('/expenses', expense),
+  updateExpense: (id, expense) => api.put(`/expenses/${id}`, expense),
   deleteExpense: (id) => api.delete(`/expenses/${id}`),
-};
-
-export const categoriesAPI = {
-  getCategories: () => api.get('/categories'),
-  createCategory: (categoryData) => api.post('/categories', categoryData),
 };
 
 export default api;
